@@ -11,14 +11,14 @@
         <div class="container">
             <button class="burger-menu">
                 <span></span>
-                <span></span>
-                <span></span>
             </button>
             <nav class="header__list">
                 <a class="logo" href="#">FoodDelivery</a>
                 <a href="#menu" class="header__list-item">Меню</a>
-                <a href="#" class="header__list-item">Кошик</a>
-                <a href="#" class="header__list-item">Мої замовлення</a>
+                <a href="orders.html" class="header__list-item">Мої замовлення</a>
+                <a href="#" class="cart-link">Кошик
+                    <span class="cart-count">0</span>
+                </a>
                 <a href="#"><img src="img/header/profile.svg" alt="Profile" class="header__list-profile"></a>
             </nav>
         </div>
@@ -31,51 +31,60 @@
                     <img src="img/menu/menu_1.jpg" alt="dish" class="menu__card-img">
                     <h2 class="menu__card-title">Бургери</h2>
                     <p class="menu__card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                    <a href="#" class="card__menu-btn btn">Вибрати</a>
+                    <a href="#" class="card__menu-btn btn" data-category = "burgers">Вибрати</a>
                 </div>
 
                 <div class="menu__card">
                     <img src="img/menu/menu_2.jpg" alt="dish" class="menu__card-img">
                     <h2 class="menu__card-title">Піца</h2>
                     <p class="menu__card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                    <a href="#" class="card__menu-btn btn">Вибрати</a>
+                    <a href="#" class="card__menu-btn btn" data-category = "pizza">Вибрати</a>
                 </div>
 
                 <div class="menu__card">
                     <img src="img/menu/menu_3.jpeg" alt="dish" class="menu__card-img">
                     <h2 class="menu__card-title">Роли</h2>
                     <p class="menu__card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                    <a href="#" class="card__menu-btn btn">Вибрати</a>
+                    <a href="#" class="card__menu-btn btn" data-category = "rolls">Вибрати</a>
                 </div>
 
                 <div class="menu__card">
                     <img src="img/menu/menu_4.jpg" alt="dish" class="menu__card-img">
                     <h2 class="menu__card-title">Кебаби</h2>
                     <p class="menu__card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                    <a href="#" class="card__menu-btn btn">Вибрати</a>
+                    <a href="#" class="card__menu-btn btn" data-category = "kebabs">Вибрати</a>
                 </div>
 
                 <div class="menu__card">
                     <img src="img/menu/menu_5.webp" alt="dish" class="menu__card-img">
                     <h2 class="menu__card-title">Боули</h2>
                     <p class="menu__card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                    <a href="#" class="card__menu-btn btn">Вибрати</a>
+                    <a href="#" class="card__menu-btn btn" data-category = "bowls">Вибрати</a>
                 </div>
 
                 <div class="menu__card">
                     <img src="img/menu/menu_6.avif" alt="dish" class="menu__card-img">
                     <h2 class="menu__card-title">Торти</h2>
                     <p class="menu__card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                    <a href="#" class="card__menu-btn btn">Вибрати</a>
+                    <a href="#" class="card__menu-btn btn" data-category = "cakes">Вибрати</a>
                 </div>
             </section>
 
             <section class="form">
                 <h2 class="form__title">Залиште свій відгук</h2>
                 <form action="#" class="form__block">
-                    <input type="text" placeholder="Ваше ім'я" class="form__block-input">
-                    <input type="email" placeholder="Ваш email" class="form__block-input">
-                    <textarea placeholder="Ваше повідомлення" class="form__block-textarea"></textarea>
+                    <div class="rating">
+                        <input type="radio" name="rating" value="5" id="star5"><label for="star5">★</label>
+                        <input type="radio" name="rating" value="4" id="star4"><label for="star4">★</label>
+                        <input type="radio" name="rating" value="3" id="star3"><label for="star3">★</label>
+                        <input type="radio" name="rating" value="2" id="star2"><label for="star2">★</label>
+                        <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
+                    </div>
+
+                    <input type="text" placeholder="Ваше ім'я" class="form__block-input" required>
+                    <input type="email" placeholder="Ваш email" class="form__block-input" required>
+                    <textarea placeholder="Ваше повідомлення" class="form__block-textarea" required></textarea>
+                    
                     <button type="submit" class="btn">Надіслати</button>
                 </form> 
             </section>
@@ -140,6 +149,42 @@
             </div>
         </div>
     </footer>
+
+    <div class="cart-modal">
+        <div class="cart-modal__content">
+            <button class="close">&times;</button>
+            <h2>Кошик</h2>
+            <ul class="cart-items">
+                <li></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="profile-modal">
+        <div class="profile-modal__content">
+            <button class="close">&times;</button>
+            <h2>Увійти</h2>
+            <input type="text" placeholder = "Ваше ім'я" class="profile-input">
+            <input type="email" placeholder = "Ваш email" class="profile-input">
+            <button class="btn">Увійти</button>
+            <p class="choose-text">Або увійдіть через:</p>
+            <div class="profile-modal__img">
+                <img src="img/icons/google.png" alt="Google" class="profile-img">
+                <img src="img/icons/facebook.png" alt="Facebook" class="profile-img">
+            </div>
+            <p class="has-account">Немає акаунту? <a class = "register-link" href="#" onclick = "showRegisterForm()">Реєстрація</a></p>
+        </div>
+    </div>
+
+    <div class="product-modal">
+        <div class="product-modal__content">
+            <button class="close">&times;</button>
+            <h2 class = "modal-title">Назва категорії</h2>
+            <div class="product-grid">
+                <span></span>
+            </div>
+        </div>
+    </div>
 
     <script src="../lab2/main.js "></script>
 </body>
