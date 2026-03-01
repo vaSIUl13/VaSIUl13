@@ -1,34 +1,34 @@
 /*FOOTER STYLES*/
 .footer {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 .footer .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 4fr));
-    justify-content: center;
-    text-align: center;
-    padding: 5rem 1rem;
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 4fr));
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 1rem;
+  gap: 1.5rem;
 }
 
 .footer__block-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1.1rem;
 }
 
 .footer__block-item:hover {
-    transition: .3s ease;
-    text-decoration: underline;
+  transition: 0.3s ease;
+  text-decoration: underline;
 }
 
 .footer__block-item--title a {
-    color: #ff9d00;
-    font-size: 1.4rem;
+  color: #ff9d00;
+  font-size: 1.4rem;
 }
 
 .footer__block-item--title {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }

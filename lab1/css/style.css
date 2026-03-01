@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 
 @import url(./burger_styles.css);
 @import url(./cart.css);
@@ -10,6 +10,3 @@
 @import url(./media.css);
 @import url(./footer_styles.css);
 @import url(./header_style.css);
-
-
-

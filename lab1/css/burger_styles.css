@@ -1,61 +1,62 @@
 /*BURGER MENU STYLES*/
 .burger-menu {
-    position: relative;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 2rem;
-    height: 2rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    gap: 0.5rem;
-    margin-right: 1rem;
-    z-index: 1000;
+  position: relative;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  gap: 0.5rem;
+  margin-right: 1rem;
+  z-index: 1000;
 }
 
 .burger-menu span {
-    display: block;
-    width: 28px;
-    height: 4px;
-    background: #ff9d00;
-    border-radius: 2px;
-    transition: all .3s ease;
+  display: block;
+  width: 28px;
+  height: 4px;
+  background: #ff9d00;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
-.burger-menu::before, .burger-menu::after {
-    content: "";
-    position: absolute;
-    width: 28px;
-    height: 4px;
-    background: #ff9d00;
-    border-radius: 2px;
-    transition: all .3s ease;
+.burger-menu::before,
+.burger-menu::after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 4px;
+  background: #ff9d00;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
 .burger-menu::before {
-    top: 0;
+  top: 0;
 }
 
 .burger-menu::after {
-    bottom: 0;
+  bottom: 0;
 }
 
 .burger-menu.active span {
-    background: transparent;
+  background: transparent;
 }
 
 .burger-menu.active::before {
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg);
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
 }
 
 .burger-menu.active::after {
-    bottom: 50%;
-    transform: translateY(50%) rotate(-45deg);
+  bottom: 50%;
+  transform: translateY(50%) rotate(-45deg);
 }
 
 body.lock {
-    overflow: hidden;
+  overflow: hidden;
 }
