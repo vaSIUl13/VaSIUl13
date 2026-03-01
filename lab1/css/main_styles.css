@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Outfit", sans-serif;
+    background-color: #d7d4d4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.header__list img {
+    width: 40px;
+}
+
+nav, a, ul, li {
+    list-style: none;
+    text-decoration: none;
+    color: #000;
+}
+
+.logo {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    color: #ff9d00;
+}
+
+.register-link {
+    color: #ff9d00;
+    text-decoration: underline
+}
+
+/*BUTTON STYLE*/
+.btn {
+    padding: 0.5rem 2rem;
+    background-color: #ff9d00;
+    color: #fff;
+    border: none;
+    border-radius: 0.2rem;
+    transition: .3s ease;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #b35c0b;
+}
+
+.burger-menu.active span {
+    transform: scale(0);
+}
+
+.burger-menu.active::before {
+    transform: rotate(45deg) translate(0, -50%);
+    top: 50%;
+}
+
+.burger-menu.active::after {
+    transform: rotate(-45deg) translate(0, 50%);
+    bottom: 50%;
+}
