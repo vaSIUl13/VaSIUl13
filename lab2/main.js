@@ -223,12 +223,12 @@ document.querySelectorAll(".card__menu-btn").forEach((button) => {
                     <p class="product-item-desc">${item.desc}</p>
                     
                     <div class="quantity-selector">
-                        <button class="qty-btn minus" onclick="this.nextElementSibling.stepDown()">-</button>
+                        <button class="qty-btn minus" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.dispatchEvent(new Event('input', {bubbles: true}))">-</button>
                         <input type="number" class="product-qty" value="1" min="1" max="99">
-                        <button class="qty-btn plus" onclick="this.previousElementSibling.stepUp()">+</button>
+                        <button class="qty-btn plus" onclick="this.previousElementSibling.stepUp(); this.previousElementSibling.dispatchEvent(new Event('input', {bubbles: true}))">+</button>
                     </div>
 
-                    <span class="product-item-price">${item.price} ₴</span>
+                    <span class="product-item-price" data-base-price="${item.price}">${item.price} ₴</span>
                     <button class="btn product-item-btn">Додати в кошик</button>
                 </div>
             `;
@@ -259,6 +259,9 @@ const cartItemsList = document.querySelector(".cart-items");
 
 // функція додавання
 function addToCart(productName, price, quantity) {
+  // Перевірка кількості перед додаванням
+  if (quantity < 1) quantity = 1;
+
   const existingItem = cart.find((item) => item.name === productName);
 
   if (existingItem) {
@@ -279,22 +282,55 @@ function addToCart(productName, price, quantity) {
   updateCartUI();
 }
 
-// обробник кліку по кнопці додати
+productGrid.addEventListener("input", (e) => {
+  if (e.target.classList.contains("product-qty")) {
+    const input = e.target;
+    const productCard = input.closest(".product-item");
+    const priceElement = productCard.querySelector(".product-item-price");
+
+    const basePrice = parseInt(priceElement.getAttribute("data-base-price"));
+
+    let quantity = parseInt(input.value);
+    
+    if (isNaN(quantity) || quantity < 1) {
+      quantity = 1;
+    }
+
+    priceElement.innerText = `${basePrice * quantity} ₴`;
+  }
+});
+
+productGrid.addEventListener("change", (e) => {
+  if (e.target.classList.contains("product-qty")) {
+    const input = e.target;
+    if (isNaN(parseInt(input.value)) || parseInt(input.value) < 1) {
+      input.value = 1;
+    }
+  }
+});
+
+// Обробник кліку
 productGrid.addEventListener("click", (e) => {
-  if (e.target.classList.contains("product-item-btn")) {
-    const productCard = e.target.closest(".product-item");
-    const productName = productCard.querySelector(
-      ".product-item-title",
-    ).innerText;
-    const productPrice = parseInt(
-      productCard.querySelector(".product-item-price").innerText,
-    );
-    const quantity = parseInt(productCard.querySelector(".product-qty").value);
+  const target = e.target;
 
-    addToCart(productName, productPrice, quantity);
+  if (target.classList.contains("product-item-btn")) {
+    const productCard = target.closest(".product-item");
+    const productName = productCard.querySelector(".product-item-title").innerText;
+    const priceElement = productCard.querySelector(".product-item-price");
+    const qtyInput = productCard.querySelector(".product-qty");
 
-    // Скидаю назад на 1
-    productCard.querySelector(".product-qty").value = 1;
+    const basePrice = parseInt(priceElement.getAttribute("data-base-price"));
+    
+    let quantity = parseInt(qtyInput.value);
+    if (isNaN(quantity) || quantity < 1) {
+        quantity = 1;
+    }
+
+    addToCart(productName, basePrice, quantity);
+
+    // Скидаємо кількість до 1
+    qtyInput.value = 1;
+    qtyInput.dispatchEvent(new Event('input', { bubbles: true }));
   }
 });
 
