@@ -101,6 +101,109 @@ const dishes = [
     price: 60,
     description: "Ніжна кава з великою кількістю молока",
     image: images.late
+  },
+
+  // --- БУРГЕРИ ---
+  {
+    id: 13,
+    name: "Класик Бургер",
+    category: "бургери",
+    price: 210,
+    description: "Яловича котлета, чедер, маринований огірок та фірмовий соус",
+    image: images.burger_classic
+  },
+  {
+    id: 14,
+    name: "BBQ Бургер",
+    category: "бургери",
+    price: 245,
+    description: "Бекон, карамелізована цибуля, яловичина та соус барбекю",
+    image: images.burger_bbq
+  },
+  {
+    id: 15,
+    name: "Чікен Бургер",
+    category: "бургери",
+    price: 195,
+    description: "Хрустке куряче філе, листя салату та майонезний соус",
+    image: images.burger_chicken
+  },
+
+  {
+    id: 16,
+    name: "Дабл Чізбургер",
+    category: "бургери",
+    price: 275,
+    description: "Дві соковиті яловичі котлети, подвійний чедер та фірмовий гірчичний соус",
+    image: images.burger_double_cheese
+  },
+
+  // --- БОУЛИ ---
+  {
+    id: 17,
+    name: "Боул з Лососем",
+    category: "боули",
+    price: 320,
+    description: "Рис, слабосолений лосось, боби едамаме, чука та авокадо",
+    image: images.bowl_salmon
+  },
+  {
+    id: 18,
+    name: "Кіноа Боул",
+    category: "боули",
+    price: 280,
+    description: "Кіноа, запечений гарбуз, шпинат, фета та насіння льону",
+    image: images.bowl_quinoa
+  },
+  {
+    id: 19,
+    name: "Боул з Тунцем",
+    category: "боули",
+    price: 310,
+    description: "Тунець татакі, манго, рис, огірок та кунжутний соус",
+    image: images.bowl_tuna
+  },
+  {
+    id: 20,
+    name: "Веган Боул",
+    category: "боули",
+    price: 265,
+    description: "Нут, тофу, броколі, свіжий шпинат та насіння гарбуза з горіховим соусом",
+    image: images.bowl_vegan
+  },
+
+  // --- ПАСТА ---
+  {
+    id: 21,
+    name: "Карбонара",
+    category: "паста",
+    price: 260,
+    description: "Спагеті, бекон, вершки, пармезан та яєчний жовток",
+    image: images.pasta_carbonara
+  },
+  {
+    id: 22,
+    name: "Паста з морепродуктами",
+    category: "паста",
+    price: 340,
+    description: "Мідії, креветки, кальмари у томатному соусі",
+    image: images.pasta_seafood
+  },
+  {
+    id: 23,
+    name: "Фетучіні Альфредо",
+    category: "паста",
+    price: 240,
+    description: "Класична паста з ніжним курячим філе та грибами у вершковому соусі",
+    image: images.pasta_alfredo
+  },
+  {
+    id: 24,
+    name: "Паста Болоньєзе",
+    category: "паста",
+    price: 255,
+    description: "Класична італійська паста з густим м'ясним рагу та томатами",
+    image: images.pasta_bolognese
   }
 ];
 

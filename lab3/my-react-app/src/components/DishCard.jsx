@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/DishCard.css";
 import "../styles/MenuPage.css"
 
-const DishCard = ({ dish }) => {
+const DishCard = ({ dish, onAddToCart }) => {
   return (
     <div className="dish-card">
       <img src={dish.image} alt={dish.name} />
@@ -11,7 +11,7 @@ const DishCard = ({ dish }) => {
       <p>
         <strong>Ціна: {dish.price} грн</strong>
       </p>  
-      <button className="dish-card-button">Додати в кошик</button>
+      <button onClick={() => onAddToCart(dish)} className="dish-card-button">Додати в кошик</button>
     </div>
   );
 };

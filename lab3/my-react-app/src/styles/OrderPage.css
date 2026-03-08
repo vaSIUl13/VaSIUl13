@@ -1,0 +1,42 @@
+.order-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border-left: 5px solid #2ed573; /* Зелена смужка як символ успіху */
+}
+
+.title_order {
+  margin: 2rem 0;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #2f3542;
+}
+
+.order-date {
+  color: #a4b0be;
+  font-weight: normal;
+}
+
+.order-footer {
+  text-align: right;
+  margin-top: 15px;
+  font-size: 1.1rem;
+}
+
+.empty-cart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  text-align: center;
+}
