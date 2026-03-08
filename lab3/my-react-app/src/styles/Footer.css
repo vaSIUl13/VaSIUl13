@@ -1,8 +1,8 @@
 .footer {
-  background-color: #2f3542; /* Темний фон як база */
+  background-color: #2f3542;
   color: white;
   padding: 40px 0 20px;
-  margin-top: 50px; /* Відступ від карток страв */
+  margin-top: 50px;
 }
 
 .footer-content {
@@ -13,7 +13,7 @@
 }
 
 .footer-section h4 {
-  color: #ff4757; /* Твій акцентний червоний колір */
+  color: #ff4757;
   margin-bottom: 15px;
 }
 
@@ -27,7 +27,6 @@
   color: #a4b0be;
 }
 
-/* Адаптація для мобільних */
 @media (max-width: 740px) {
   .footer-content {
     flex-direction: column;
