@@ -1,39 +1,45 @@
-.dishes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  justify-content: center;
-  justify-items: center;
-  gap: 1.5rem;
-  padding: 2rem 0;
+.menu-page {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.title {
-  color: #ff4757;
-  text-transform: uppercase;
-  margin-top: 2rem;
-}
-
-.filter-buttons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+.menu-title {
+  text-align: center;
+  color: #ff4757; 
   margin-bottom: 30px;
-  gap: 10px;
-  margin-top: 1rem;
+  text-transform: uppercase;
 }
 
-.filter-buttons button {
-  padding: 8px 20px;
-  border-radius: 20px;
-  border: 1px solid #ff4757;
-  background: #fff;
+.category-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.category-btn {
+  padding: 10px 25px;
+  border: 2px solid #ff4757;
+  background-color: transparent;
+  color: #ff4757;
+  border-radius: 30px;
   cursor: pointer;
-  color: #e84118;
-  font-weight: 700;
-  font-size: 1.2rem;
-  transition: 0.3s;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-.filter-buttons button:hover {
-  background: #ff4757;
+.category-btn:hover, 
+.category-btn.active {
+  background-color: #ff4757;
   color: white;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+  gap: 30px;
+  justify-items: center;
 }

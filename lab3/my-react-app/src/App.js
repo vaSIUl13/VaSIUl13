@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -6,11 +6,22 @@ import MenuPage from "./pages/MenuPage";
 import CartPage from "./pages/CartPage";
 import OrderPage from "./pages/OrderPage";
 import "./styles/App.css";
+import AuthPage from './pages/AuthPage';
+import { auth } from './firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 function App() {
   const [cart, setCart] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [user, setUser] = useState(null); 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser); 
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleCheckout = () => {
     if (cart.length === 0) return;
@@ -55,23 +66,23 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar cartCount={cart.reduce((sum, item) => sum + item.quantity, 0)} />
+      <Navbar cartCount={cart.length} user={user} />
 
       <main className="container">
         <Routes>
           <Route path="/" element={<MenuPage onAddToCart={addToCart} />} />
-          <Route
-            path="/cart"
-            element={
+          <Route path="/cart" element={
               <CartPage
                 cartItems={cart}
                 onUpdateQuantity={updateQuantity}
                 onRemove={removeFromCart}
                 onCheckout={handleCheckout}
+                user={user}
               />
             }
           />
           <Route path="/orders" element={<OrderPage orders={orders} />} />
+          <Route path="/login" element={<AuthPage />} />
         </Routes>
       </main>
 

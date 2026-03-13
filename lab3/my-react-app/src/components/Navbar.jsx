@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Navbar.css";
+import { auth } from "../firebase";
+import { signOut } from "firebase/auth";
 
-const Navbar = ({ cartCount }) => {
+const Navbar = ({ cartCount, user }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Помилка при виході:", error);
+    }
+  };
 
   return (
     <nav className="navbar">
@@ -50,6 +60,29 @@ const Navbar = ({ cartCount }) => {
               Замовлення
             </Link>
           </li>
+          {user ? (
+            <li>
+              <button
+                onClick={handleLogout}
+                className="logout-btn"
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "white",
+                  cursor: "pointer",
+                  fontSize: "1rem",
+                }}
+              >
+                Вийти ({user.email.split("@")[0]})
+              </button>
+            </li>
+          ) : (
+            <li>
+              <Link to="/login" className="login-link">
+                Увійти
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/CartPage.css";
 import { Link } from "react-router-dom";
 
-const CartPage = ({ cartItems, onUpdateQuantity, onRemove, onCheckout }) => {
+const CartPage = ({ cartItems, onUpdateQuantity, onRemove, onCheckout, user }) => {
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
@@ -43,9 +43,20 @@ const CartPage = ({ cartItems, onUpdateQuantity, onRemove, onCheckout }) => {
       </div>
       <div className="cart-summary">
         <h3>Разом до сплати: {totalPrice} грн</h3>
-        <button className="order-btn" onClick={onCheckout}>
-          Оформити замовлення
-        </button>
+        {user ? (
+            <button className="order-btn" onClick={onCheckout}>
+              Оформити замовлення
+            </button>
+          ) : (
+            <div className="auth-warning" style={{ marginTop: '15px', textAlign: 'center' }}>
+              <p style={{ color: '#ff4757', marginBottom: '10px', fontWeight: 'bold' }}>
+                Увійдіть в акаунт, щоб завершити замовлення
+              </p>
+              <Link to="/login" className="order-btn" style={{ textDecoration: 'none', display: 'inline-block' }}>
+                Перейти до входу
+              </Link>
+            </div>
+          )}
       </div>
     </div>
   );
