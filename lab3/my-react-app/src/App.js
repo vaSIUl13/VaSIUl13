@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom"; // Прибрав тут BrowserRouter
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -74,31 +74,28 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="app-container">
-        <Navbar cartCount={cart.length} user={user} setUser={setUser} />
-        <main>
-          <Routes>
-            {/* Оскільки Home немає, поставимо MenuPage як головну сторінку */}
-            <Route path="/" element={<MenuPage onAddToCart={addToCart} />} />
-            <Route path="/menu" element={<MenuPage onAddToCart={addToCart} />} />
-            <Route
-              path="/cart"
-              element={
-                <CartPage
-                  cart={cart}
-                  removeFromCart={removeFromCart}
-                  onOrderSubmit={handleOrderSubmit}
-                />
-              }
-            />
-            <Route path="/orders" element={<OrderPage user={user} />} />
-            <Route path="/login" element={<AuthPage setUser={setUser} />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <div className="app-container">
+      <Navbar cartCount={cart.length} user={user} setUser={setUser} />
+      <main>
+        <Routes>
+          <Route path="/" element={<MenuPage onAddToCart={addToCart} />} />
+          <Route path="/menu" element={<MenuPage onAddToCart={addToCart} />} />
+          <Route
+            path="/cart"
+            element={
+              <CartPage
+                cart={cart}
+                removeFromCart={removeFromCart}
+                onOrderSubmit={handleOrderSubmit}
+              />
+            }
+          />
+          <Route path="/orders" element={<OrderPage user={user} />} />
+          <Route path="/login" element={<AuthPage setUser={setUser} />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
