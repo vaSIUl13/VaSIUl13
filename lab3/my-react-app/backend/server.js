@@ -1,7 +1,14 @@
 const express = require("express");
 const cors = require("cors");
 const admin = require("firebase-admin");
-const serviceAccount = require("../serviceAccountKey.json");
+const path = require("path");
+const fs = require("fs");
+
+const secretPath = fs.existsSync("/etc/secrets/serviceAccountKey.json")
+  ? "/etc/secrets/serviceAccountKey.json"
+  : path.join(__dirname, "serviceAccountKey.json");
+
+const serviceAccount = require(secretPath);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
