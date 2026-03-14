@@ -1,142 +1,103 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import MenuPage from "./pages/MenuPage";
-import CartPage from "./pages/CartPage";
-import OrderPage from "./pages/OrderPage";
-import "./styles/App.css";
-import AuthPage from './pages/AuthPage';
-import { auth } from './firebase';
-import { onAuthStateChanged } from 'firebase/auth';
-// import { collection, addDoc, getDocs } from 'firebase/firestore';
-// import { db } from './firebase';
-// import dishes from './data/dishes';
+import Home from "./pages/Home";
+import Menu from "./pages/Menu";
+import Cart from "./pages/Cart";
+import Orders from "./pages/OrderPage";
+import Login from "./pages/Login";
 
 function App() {
   const [cart, setCart] = useState([]);
-  const [user, setUser] = useState(null); 
-  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-
-    return () => unsubscribe();
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
   }, []);
 
-  const handleCheckout = async () => {
-    if (cart.length === 0) {
-      alert("Кошик порожній!");
+  const addToCart = (item) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((i) => i.id === item.id);
+      if (existingItem) {
+        return prevCart.map((i) =>
+          i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+        );
+      }
+      return [...prevCart, { ...item, quantity: 1 }];
+    });
+  };
+
+  const removeFromCart = (id) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const handleOrderSubmit = async () => {
+    if (!user) {
+      alert("Будь ласка, увійдіть, щоб оформити замовлення.");
       return;
     }
 
-    const newOrder = {
-      items: [...cart],
-      total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
-      userEmail: user ? user.email : "невідомий", 
-      date: new Date().toLocaleString(),
+    const orderData = {
+      userEmail: user.email,
+      items: cart,
+      date: new Date().toISOString(),
+      totalPrice: cart.reduce((total, item) => total + item.price * item.quantity, 0),
     };
 
     try {
       const response = await fetch("https://vasiul13.onrender.com/api/orders", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newOrder),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        alert(data.message); 
-        setCart([]); 
-        navigate("/orders"); 
+        alert(data.message);
+        clearCart();
       } else {
-        alert("Помилка від сервера: " + data.message);
+        alert(data.message || "Помилка при оформленні.");
       }
     } catch (error) {
-      console.error("Помилка при відправці замовлення:", error);
+      console.error("Error submitting order:", error);
       alert("Не вдалося з'єднатися з сервером.");
     }
   };
 
-  const addToCart = (dish) => {
-    setCart((prevCart) => {
-      const isExist = prevCart.find((item) => item.id === dish.id);
-      if (isExist) {
-        return prevCart.map((item) =>
-          item.id === dish.id ? { ...item, quantity: item.quantity + 1 } : item,
-        );
-      }
-      return [...prevCart, { ...dish, quantity: 1 }];
-    });
-  };
-
-  const updateQuantity = (id, delta) => {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + delta) }
-          : item,
-      ),
-    );
-  };
-
-  const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
-  };
-
-//   const uploadMenuToFirebase = async () => {
-//   try {
-//     const menuCollectionRef = collection(db, 'menu');
-//     const querySnapshot = await getDocs(menuCollectionRef);
-    
-//     if (querySnapshot.empty) {
-//       console.log("База порожня. Починаю завантаження...");
-
-//       for (const dish of dishes) {
-//         await addDoc(menuCollectionRef, dish);
-//       }
-//       console.log("Меню успішно завантажено в Firebase!");
-//     } else {
-//       console.log("Меню вже існує в базі даних.");
-//     }
-//   } catch (error) {
-//     console.error("Помилка завантаження меню:", error);
-//   }
-// };
-
-//   useEffect(() => {
-//     uploadMenuToFirebase();
-//   }, []);
-
   return (
-    <div className="App">
-      <Navbar cartCount={cart.length} user={user} />
-
-      <main className="container">
-        <Routes>
-          <Route path="/" element={<MenuPage onAddToCart={addToCart} />} />
-          <Route path="/cart" element={
-              <CartPage
-                cartItems={cart}
-                onUpdateQuantity={updateQuantity}
-                onRemove={removeFromCart}
-                onCheckout={handleCheckout}
-                user={user}
-              />
-            }
-          />
-          <Route path="/orders" element={<OrderPage />} />
-          <Route path="/login" element={<AuthPage />} />
-        </Routes>
-      </main>
-
-      <Footer />
-    </div>
+    <Router>
+      <div className="app-container">
+        <Navbar cartCount={cart.length} user={user} setUser={setUser} />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/menu" element={<Menu addToCart={addToCart} />} />
+            <Route
+              path="/cart"
+              element={
+                <Cart
+                  cart={cart}
+                  removeFromCart={removeFromCart}
+                  onOrderSubmit={handleOrderSubmit}
+                />
+              }
+            />
+            <Route path="/orders" element={<Orders user={user} />} />
+            <Route path="/login" element={<Login setUser={setUser} />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

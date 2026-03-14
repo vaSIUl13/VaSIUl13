@@ -2,36 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const admin = require("firebase-admin");
 
-let firebaseKey;
-try {
-  if (process.env.FIREBASE_KEY) {
-    // Це магічний рядок, який вичищає всі проблеми з переносом рядків
-    const cleanKey = process.env.FIREBASE_KEY
-      .replace(/\\n/g, '\n')
-      .replace(/\n/g, '\\n') // тимчасово екрануємо справжні переноси
-      .replace(/\\n/g, '\n'); // і робимо їх правильними для JSON
-    
-    firebaseKey = JSON.parse(cleanKey);
-    console.log("Firebase key loaded from Environment");
-  } else {
-    firebaseKey = require("./serviceAccountKey.json");
-  }
+const admin = require("firebase-admin");
+const serviceAccount = require("./serviceAccountKey.json");
 
-  if (firebaseKey) {
-    admin.initializeApp({
-      credential: admin.credential.cert(firebaseKey)
-    });
-  }
-} catch (e) {
-  console.error("Помилка JSON:", e.message);
-  // План Б: якщо JSON все одно битий, спробуємо хоча б завантажити файл
-  try {
-    firebaseKey = require("./serviceAccountKey.json");
-    admin.initializeApp({ credential: admin.credential.cert(firebaseKey) });
-  } catch (fileErr) {
-    console.error("Файл ключа теж недоступний");
-  }
-}
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
 const db = admin.firestore();
 
 const app = express();
