@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { useNavigate } from 'react-router-dom';
 import '../styles/AuthPage.css';
 
-const AuthPage = () => {
+const AuthPage = ({ setUser }) => {
   const [isLogin, setIsLogin] = useState(true); // Стан для перемикання Вхід/Реєстрація
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,11 +16,18 @@ const AuthPage = () => {
     setError(''); 
 
     try {
+      let userCredential;
       if (isLogin) {
-        await signInWithEmailAndPassword(auth, email, password);
+        userCredential = await signInWithEmailAndPassword(auth, email, password);
       } else {
-        await createUserWithEmailAndPassword(auth, email, password);
+        userCredential = await createUserWithEmailAndPassword(auth, email, password);
       }
+      
+      // ОНОВЛЮЄМО КОРИСТУВАЧА В APP.JS
+      const loggedInUser = userCredential.user;
+      setUser(loggedInUser); 
+      localStorage.setItem("user", JSON.stringify(loggedInUser));
+
       navigate('/'); 
     } catch (err) {
       setError("Помилка: " + err.message); 

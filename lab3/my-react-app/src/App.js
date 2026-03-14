@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom"; // Прибрав тут BrowserRouter
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-import "./styles/App.css";
+import "./styles/App.css"; 
 
 import MenuPage from "./pages/MenuPage"; 
 import CartPage from "./pages/CartPage";
@@ -31,6 +31,17 @@ function App() {
       }
       return [...prevCart, { ...item, quantity: 1 }];
     });
+  };
+
+  // Функція для зміни кількості (кнопки + та - в кошику)
+  const updateQuantity = (id, delta) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + delta) }
+          : item
+      )
+    );
   };
 
   const removeFromCart = (id) => {
@@ -77,7 +88,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <Navbar cartCount={cart.length} user={user} setUser={setUser} />
+      <Navbar cartCount={cart.length} user={user} />
       <main>
         <Routes>
           <Route path="/" element={<MenuPage onAddToCart={addToCart} />} />
@@ -86,9 +97,11 @@ function App() {
             path="/cart"
             element={
               <CartPage
-                cart={cart}
-                removeFromCart={removeFromCart}
-                onOrderSubmit={handleOrderSubmit}
+                cartItems={cart} // ПРАВИЛЬНА НАЗВА (було cart)
+                onUpdateQuantity={updateQuantity} // ПРАВИЛЬНА НАЗВА
+                onRemove={removeFromCart} // ПРАВИЛЬНА НАЗВА (було removeFromCart)
+                onCheckout={handleOrderSubmit} // ПРАВИЛЬНА НАЗВА (було onOrderSubmit)
+                user={user}
               />
             }
           />

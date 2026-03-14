@@ -24,7 +24,7 @@ function OrderPage() {
   // Функція звернення до нашого Node.js сервера
   const fetchOrdersFromBackend = async (email) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/orders?email=${email}`);
+      const response = await fetch(`https://vasiul13.onrender.com/api/orders?email=${email}`);
       const data = await response.json();
       
       if (response.ok) {
@@ -57,7 +57,7 @@ function OrderPage() {
             <div key={order.id} style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '15px', backgroundColor: '#f9f9f9' }}>
               <h3>Замовлення #{orders.length - index}</h3>
               <p><strong>Дата:</strong> {order.date}</p>
-              <p><strong>Загальна сума:</strong> {order.total} грн</p>
+              <p><strong>Загальна сума:</strong> {order.totalPrice} грн</p>
               
               <ul style={{ listStyleType: 'none', paddingLeft: '0', marginTop: '10px' }}>
                 {order.items.map((item, i) => (
