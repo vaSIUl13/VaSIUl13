@@ -1,5 +1,3 @@
-import { images } from "../assets/dishes/dish_import";
-
 const dishes = [
   // --- ПІЦА ---
   {
@@ -8,7 +6,7 @@ const dishes = [
     category: "піца",
     price: 250,
     description: "Класична піца з томатами, моцарелою та базиліком",
-    image: images.pizza_marg,
+    image: "/images/pizza_marg.jpg",
   },
   {
     id: 2,
@@ -16,7 +14,7 @@ const dishes = [
     category: "піца",
     price: 320,
     description: "Чотири види сиру: моцарела, пармезан, дорблю та чедер",
-    image: images.pizza_kvatro,
+    image: "/images/pizza_kvatro.jpg",
   },
   {
     id: 3,
@@ -24,7 +22,7 @@ const dishes = [
     category: "піца",
     price: 285,
     description: "Гостра піца з ковбасками пепероні та подвійною порцією сиру",
-    image: images.pizza_paperonni,
+    image: "/images/pizza_paperonni.jpg",
   },
   {
     id: 4,
@@ -32,7 +30,7 @@ const dishes = [
     category: "піца",
     price: 350,
     description: "Бекон, шинка, салямі та соковита яловичина",
-    image: images.pizza_meat,
+    image: "/images/pizza_meat.jpg",
   },
 
   // --- СУШІ ---
@@ -42,7 +40,7 @@ const dishes = [
     category: "суші",
     price: 450,
     description: "Ніжний лосось, вершковий сир, огірок та авокадо",
-    image: images.roll_phil,
+    image: "/images/roll_phil.jpg",
   },
   {
     id: 6,
@@ -50,7 +48,7 @@ const dishes = [
     category: "суші",
     price: 380,
     description: "М'ясо краба, ікра тобіко, авокадо та майонез",
-    image: images.roll_calif,
+    image: "/images/roll_calif.webp",
   },
   {
     id: 7,
@@ -58,7 +56,7 @@ const dishes = [
     category: "суші",
     price: 490,
     description: "Вугор, крем-сир, огірок, зверху обгорнутий авокадо",
-    image: images.roll_dragon_green,
+    image: "/images/roll_dragon-green.webp",
   },
   {
     id: 8,
@@ -66,7 +64,7 @@ const dishes = [
     category: "суші",
     price: 1200,
     description: "Великий набір: 32 шматочки найпопулярніших ролів",
-    image: images.roll_samurai,
+    image: "/images/roll_samurai.png",
   },
 
   // --- НАПОЇ ---
@@ -76,7 +74,7 @@ const dishes = [
     category: "напої",
     price: 45,
     description: "Охолоджений напій, 0.5л",
-    image: images.pepsi,
+    image: "/images/drink_pepsi.jpg",
   },
   {
     id: 10,
@@ -84,7 +82,7 @@ const dishes = [
     category: "напої",
     price: 65,
     description: "Натуральний лимонад із цитрусовими та м'ятою",
-    image: images.lemonade,
+    image: "/images/drink_lemonade.jpeg",
   },
   {
     id: 11,
@@ -92,7 +90,7 @@ const dishes = [
     category: "напої",
     price: 55,
     description: "Свіжовижатий сік, 0.3л",
-    image: images.orange_juice,
+    image: "/images/drink_orange_juice.jpg",
   },
   {
     id: 12,
@@ -100,7 +98,7 @@ const dishes = [
     category: "напої",
     price: 60,
     description: "Ніжна кава з великою кількістю молока",
-    image: images.late,
+    image: "/images/drink_late.jpg",
   },
 
   // --- БУРГЕРИ ---
@@ -110,7 +108,7 @@ const dishes = [
     category: "бургери",
     price: 210,
     description: "Яловича котлета, чедер, маринований огірок та фірмовий соус",
-    image: images.burger_classic,
+    image: "/images/burger_classic.jpg",
   },
   {
     id: 14,
@@ -118,7 +116,7 @@ const dishes = [
     category: "бургери",
     price: 245,
     description: "Бекон, карамелізована цибуля, яловичина та соус барбекю",
-    image: images.burger_bbq,
+    image: "/images/burger_bbq.png",
   },
   {
     id: 15,
@@ -126,7 +124,7 @@ const dishes = [
     category: "бургери",
     price: 195,
     description: "Хрустке куряче філе, листя салату та майонезний соус",
-    image: images.burger_chicken,
+    image: "/images/burger_chicken.webp",
   },
 
   {
@@ -134,9 +132,8 @@ const dishes = [
     name: "Дабл Чізбургер",
     category: "бургери",
     price: 275,
-    description:
-      "Дві соковиті яловичі котлети, подвійний чедер та фірмовий гірчичний соус",
-    image: images.burger_double_cheese,
+    description: "Дві соковиті яловичі котлети, подвійний чедер та фірмовий гірчичний соус",
+    image: "/images/burger_double_cheese.png",
   },
 
   // --- БОУЛИ ---
@@ -146,7 +143,7 @@ const dishes = [
     category: "боули",
     price: 320,
     description: "Рис, слабосолений лосось, боби едамаме, чука та авокадо",
-    image: images.bowl_salmon,
+    image: "/images/bowl_salmon.jpg",
   },
   {
     id: 18,
@@ -154,7 +151,7 @@ const dishes = [
     category: "боули",
     price: 280,
     description: "Кіноа, запечений гарбуз, шпинат, фета та насіння льону",
-    image: images.bowl_quinoa,
+    image: "/images/bowl_quinoa.jpg",
   },
   {
     id: 19,
@@ -162,16 +159,15 @@ const dishes = [
     category: "боули",
     price: 310,
     description: "Тунець татакі, манго, рис, огірок та кунжутний соус",
-    image: images.bowl_tuna,
+    image: "/images/bowl_tuna.avif",
   },
   {
     id: 20,
     name: "Веган Боул",
     category: "боули",
     price: 265,
-    description:
-      "Нут, тофу, броколі, свіжий шпинат та насіння гарбуза з горіховим соусом",
-    image: images.bowl_vegan,
+    description: "Нут, тофу, броколі, свіжий шпинат та насіння гарбуза з горіховим соусом",
+    image: "/images/bowl_vegan.jpg",
   },
 
   // --- ПАСТА ---
@@ -181,7 +177,7 @@ const dishes = [
     category: "паста",
     price: 260,
     description: "Спагеті, бекон, вершки, пармезан та яєчний жовток",
-    image: images.pasta_carbonara,
+    image: "/images/pasta_carbonara.jpg",
   },
   {
     id: 22,
@@ -189,16 +185,15 @@ const dishes = [
     category: "паста",
     price: 340,
     description: "Мідії, креветки, кальмари у томатному соусі",
-    image: images.pasta_seafood,
+    image: "/images/pasta_seafood.webp",
   },
   {
     id: 23,
     name: "Фетучіні Альфредо",
     category: "паста",
     price: 240,
-    description:
-      "Класична паста з ніжним курячим філе та грибами у вершковому соусі",
-    image: images.pasta_alfredo,
+    description: "Класична паста з ніжним курячим філе та грибами у вершковому соусі",
+    image: "/images/pasta_alfredo.jpg",
   },
   {
     id: 24,
@@ -206,7 +201,7 @@ const dishes = [
     category: "паста",
     price: 255,
     description: "Класична італійська паста з густим м'ясним рагу та томатами",
-    image: images.pasta_bolognese,
+    image: "/images/pasta_bolognese.jpg",
   },
 ];
 

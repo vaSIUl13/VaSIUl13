@@ -9,6 +9,9 @@ import "./styles/App.css";
 import AuthPage from './pages/AuthPage';
 import { auth } from './firebase';
 import { onAuthStateChanged } from 'firebase/auth';
+// import { collection, addDoc, getDocs } from 'firebase/firestore';
+// import { db } from './firebase';
+// import dishes from './data/dishes';
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -63,6 +66,34 @@ function App() {
   const removeFromCart = (id) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
   };
+
+//   const uploadMenuToFirebase = async () => {
+//   try {
+//     const menuCollectionRef = collection(db, 'menu');
+    
+//     // Робимо перевірку: чи база порожня, щоб випадково не задублювати страви
+//     const querySnapshot = await getDocs(menuCollectionRef);
+    
+//     if (querySnapshot.empty) {
+//       console.log("База порожня. Починаю завантаження...");
+      
+//       // Беремо твій локальний масив dishes і кожну страву по черзі закидаємо в базу
+//       for (const dish of dishes) {
+//         await addDoc(menuCollectionRef, dish);
+//       }
+//       console.log("Меню успішно завантажено в Firebase!");
+//     } else {
+//       console.log("Меню вже існує в базі даних.");
+//     }
+//   } catch (error) {
+//     console.error("Помилка завантаження меню:", error);
+//   }
+// };
+
+// // 3. Спеціальний хук, який викликав цю функцію рівно один раз при запуску сайту:
+//   useEffect(() => {
+//     uploadMenuToFirebase();
+//   }, []);
 
   return (
     <div className="App">
