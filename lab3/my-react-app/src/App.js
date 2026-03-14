@@ -21,6 +21,12 @@ function App() {
     }
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("user"); 
+    setUser(null); 
+    window.location.href = "/";
+  };
+
   const addToCart = (item) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((i) => i.id === item.id);
@@ -33,7 +39,6 @@ function App() {
     });
   };
 
-  // Функція для зміни кількості (кнопки + та - в кошику)
   const updateQuantity = (id, delta) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
@@ -88,7 +93,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <Navbar cartCount={cart.length} user={user} />
+      <Navbar cartCount={cart.length} user={user} onLogout={handleLogout} />
       <main>
         <Routes>
           <Route path="/" element={<MenuPage onAddToCart={addToCart} />} />
@@ -97,10 +102,10 @@ function App() {
             path="/cart"
             element={
               <CartPage
-                cartItems={cart} // ПРАВИЛЬНА НАЗВА (було cart)
-                onUpdateQuantity={updateQuantity} // ПРАВИЛЬНА НАЗВА
-                onRemove={removeFromCart} // ПРАВИЛЬНА НАЗВА (було removeFromCart)
-                onCheckout={handleOrderSubmit} // ПРАВИЛЬНА НАЗВА (було onOrderSubmit)
+                cartItems={cart} 
+                onUpdateQuantity={updateQuantity} 
+                onRemove={removeFromCart} 
+                onCheckout={handleOrderSubmit} 
                 user={user}
               />
             }

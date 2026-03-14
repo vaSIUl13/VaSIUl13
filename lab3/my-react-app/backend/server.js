@@ -74,7 +74,7 @@ app.get("/api/orders", async (req, res) => {
     orders.sort((a, b) => {
       const dateA = new Date(a.date).getTime();
       const dateB = new Date(b.date).getTime();
-      return dateB - dateA; // Від більшого (нового) до меншого (старого)
+      return dateB - dateA; 
     });
 
     res.json(orders);

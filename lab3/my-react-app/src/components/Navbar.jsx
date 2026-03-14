@@ -4,12 +4,13 @@ import "../styles/Navbar.css";
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 
-const Navbar = ({ cartCount, user }) => {
+const Navbar = ({ cartCount, user, onLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
+      await signOut(auth); 
+      onLogout(); 
     } catch (error) {
       console.error("Помилка при виході:", error);
     }

@@ -7,7 +7,6 @@ function OrderPage() {
   const [userEmail, setUserEmail] = useState(null);
 
   useEffect(() => {
-    // Чекаємо, поки Firebase перевірить, чи увійшов юзер
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUserEmail(user.email);
@@ -21,7 +20,6 @@ function OrderPage() {
     return () => unsubscribe();
   }, []);
 
-  // Функція звернення до нашого Node.js сервера
   const fetchOrdersFromBackend = async (email) => {
     try {
       const response = await fetch(`https://vasiul13.onrender.com/api/orders?email=${email}`);
@@ -39,10 +37,8 @@ function OrderPage() {
     }
   };
 
-  // Якщо дані ще вантажаться
   if (loading) return <h2 style={{textAlign: 'center', marginTop: '50px'}}>Завантаження замовлень...</h2>;
 
-  // Якщо юзер не увійшов
   if (!userEmail) return <h2 style={{textAlign: 'center', marginTop: '50px'}}>Будь ласка, увійдіть в акаунт, щоб побачити свої замовлення.</h2>;
 
   return (
