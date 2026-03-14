@@ -2,16 +2,30 @@ const express = require("express");
 const cors = require("cors");
 const admin = require("firebase-admin");
 
-const firebaseKey = process.env.FIREBASE_KEY 
-  ? JSON.parse(process.env.FIREBASE_KEY.replace(/\\n/g, '\n')) 
-  : null;
+let firebaseKey;
+try {
+  if (process.env.FIREBASE_KEY) {
+    // Виправляємо подвійні екрановані символи, якщо вони є
+    const cleanKey = process.env.FIREBASE_KEY.replace(/\\n/g, '\n');
+    firebaseKey = JSON.parse(cleanKey);
+    console.log("Firebase key loaded from Environment");
+  } else {
+    firebaseKey = require("./serviceAccountKey.json");
+    console.log("Firebase key loaded from File");
+  }
+} catch (e) {
+  console.error("Критична помилка ініціалізації ключа:", e.message);
+}
 
-admin.initializeApp({
-  credential: admin.credential.cert(firebaseKey)
-});
+if (firebaseKey) {
+  admin.initializeApp({
+    credential: admin.credential.cert(firebaseKey)
+  });
+}
+
 const db = admin.firestore();
-
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
