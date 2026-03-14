@@ -21,24 +21,47 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser); 
+      setUser(currentUser);
     });
+
     return () => unsubscribe();
   }, []);
 
-  const handleCheckout = () => {
-    if (cart.length === 0) return;
+  const handleCheckout = async () => {
+    if (cart.length === 0) {
+      alert("Кошик порожній!");
+      return;
+    }
 
     const newOrder = {
-      id: Date.now(),
-      date: new Date().toLocaleString(),
       items: [...cart],
       total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      userEmail: user ? user.email : "невідомий", 
+      date: new Date().toLocaleString(),
     };
 
-    setOrders([newOrder, ...orders]);
-    setCart([]);
-    navigate("/orders");
+    try {
+      const response = await fetch("http://localhost:5000/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newOrder),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.message); 
+        setCart([]); 
+        navigate("/orders"); 
+      } else {
+        alert("Помилка від сервера: " + data.message);
+      }
+    } catch (error) {
+      console.error("Помилка при відправці замовлення:", error);
+      alert("Не вдалося з'єднатися з сервером.");
+    }
   };
 
   const addToCart = (dish) => {
@@ -70,14 +93,11 @@ function App() {
 //   const uploadMenuToFirebase = async () => {
 //   try {
 //     const menuCollectionRef = collection(db, 'menu');
-    
-//     // Робимо перевірку: чи база порожня, щоб випадково не задублювати страви
 //     const querySnapshot = await getDocs(menuCollectionRef);
     
 //     if (querySnapshot.empty) {
 //       console.log("База порожня. Починаю завантаження...");
-      
-//       // Беремо твій локальний масив dishes і кожну страву по черзі закидаємо в базу
+
 //       for (const dish of dishes) {
 //         await addDoc(menuCollectionRef, dish);
 //       }
@@ -90,7 +110,6 @@ function App() {
 //   }
 // };
 
-// // 3. Спеціальний хук, який викликав цю функцію рівно один раз при запуску сайту:
 //   useEffect(() => {
 //     uploadMenuToFirebase();
 //   }, []);
