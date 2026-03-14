@@ -15,7 +15,6 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 function App() {
   const [cart, setCart] = useState([]);
-  const [orders, setOrders] = useState([]);
   const [user, setUser] = useState(null); 
   const navigate = useNavigate();
 
@@ -131,7 +130,7 @@ function App() {
               />
             }
           />
-          <Route path="/orders" element={<OrderPage orders={orders} />} />
+          <Route path="/orders" element={<OrderPage />} />
           <Route path="/login" element={<AuthPage />} />
         </Routes>
       </main>
