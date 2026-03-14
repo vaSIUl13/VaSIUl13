@@ -24,7 +24,6 @@ function OrderPage() {
   // Функція звернення до нашого Node.js сервера
   const fetchOrdersFromBackend = async (email) => {
     try {
-      // Робимо GET-запит на бекенд
       const response = await fetch(`http://localhost:5000/api/orders?email=${email}`);
       const data = await response.json();
       
