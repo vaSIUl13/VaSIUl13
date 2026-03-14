@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Home from "./pages/Home";
-import MenuPage from "./pages/MenuPage"; // Виправив назву тут
-import Cart from "./pages/Cart";
-import Orders from "./pages/OrderPage";
-import Login from "./pages/Login";
+
+import MenuPage from "./pages/MenuPage"; 
+import CartPage from "./pages/CartPage";
+import OrderPage from "./pages/OrderPage";
+import AuthPage from "./pages/AuthPage";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -79,20 +79,21 @@ function App() {
         <Navbar cartCount={cart.length} user={user} setUser={setUser} />
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/menu" element={<MenuPage onAddToCart={addToCart} />} /> {/* Виправив тут */}
+            {/* Оскільки Home немає, поставимо MenuPage як головну сторінку */}
+            <Route path="/" element={<MenuPage onAddToCart={addToCart} />} />
+            <Route path="/menu" element={<MenuPage onAddToCart={addToCart} />} />
             <Route
               path="/cart"
               element={
-                <Cart
+                <CartPage
                   cart={cart}
                   removeFromCart={removeFromCart}
                   onOrderSubmit={handleOrderSubmit}
                 />
               }
             />
-            <Route path="/orders" element={<Orders user={user} />} />
-            <Route path="/login" element={<Login setUser={setUser} />} />
+            <Route path="/orders" element={<OrderPage user={user} />} />
+            <Route path="/login" element={<AuthPage setUser={setUser} />} />
           </Routes>
         </main>
         <Footer />
