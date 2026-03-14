@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth"; // Додаємо для авторизації
-import { getFirestore } from "firebase/firestore"; // Додаємо для бази даних
+import { getAuth } from "firebase/auth"; 
+import { getFirestore } from "firebase/firestore"; 
 
 const firebaseConfig = {
   apiKey: "AIzaSyB7V7vx5S3Gp0RWzEbphNMjJje-0gYD3ec",
