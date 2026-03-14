@@ -1,10 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const admin = require("firebase-admin");
-const serviceAccount = require("./serviceAccountKey.json");
+
+const firebaseKey = process.env.FIREBASE_KEY 
+  ? JSON.parse(process.env.FIREBASE_KEY) 
+  : require("./serviceAccountKey.json");
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(firebaseKey)
 });
 const db = admin.firestore();
 
@@ -20,7 +23,7 @@ app.post("/api/orders", async (req, res) => {
 
     if (totalItems < 1) {
       return res.status(400).json({ message: "Кошик порожній. Додайте мінімум 1 страву." });
-    }
+    } 
     if (totalItems > 10) {
       return res.status(400).json({ message: "Перевищено ліміт! Максимум 10 страв в одному замовленні." });
     }
