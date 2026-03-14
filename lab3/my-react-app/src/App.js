@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom"; // Прибрав тут Brows
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
+import "./styles/App.css";
+
 import MenuPage from "./pages/MenuPage"; 
 import CartPage from "./pages/CartPage";
 import OrderPage from "./pages/OrderPage";
