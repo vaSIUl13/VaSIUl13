@@ -6,12 +6,11 @@ import '../styles/MenuPage.css';
 
 const MenuPage = ({ onAddToCart }) => {
   const [activeCategory, setActiveCategory] = useState('Всі');
-  const [menuItems, setMenuItems] = useState([]); // Стан для збереження страв з бази
-  const [loading, setLoading] = useState(true); // Стан для індикатора завантаження
+  const [menuItems, setMenuItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const categories = ['Всі', 'Піца', 'Суші', 'Напої', 'Паста', 'Боули', 'Бургери'];
 
-  // Функція для отримання даних з Firebase
   useEffect(() => {
     const fetchMenu = async () => {
       try {

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import Menu from "./pages/Menu";
+import MenuPage from "./pages/MenuPage"; // Виправив назву тут
 import Cart from "./pages/Cart";
 import Orders from "./pages/OrderPage";
 import Login from "./pages/Login";
@@ -80,7 +80,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/menu" element={<Menu addToCart={addToCart} />} />
+            <Route path="/menu" element={<MenuPage onAddToCart={addToCart} />} /> {/* Виправив тут */}
             <Route
               path="/cart"
               element={
